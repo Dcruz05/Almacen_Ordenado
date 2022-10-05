@@ -1,10 +1,12 @@
 class Inventario{
     constructor(){
-        this.productos=new Array();
+        this.productos=new this.productos();
     }
 
     agregar(producto){
-        this.productos.push(producto);
+        if(producto.codigo!="")
+            this.productos[this.productos.length]=producto
+
     }
 
     eliminar(codigo){
@@ -25,12 +27,24 @@ class Inventario{
     }
 
     buscar(codigo){
-        for(let i=0;i<this.productos.length;i++){
-            if(this.productos[i].codigo===codigo){
-                return this.productos[i];
+        let inicio = 0;
+        let fin = (this.productos.length) - 1;   
+        let resultado = null;
+        let encontrado = false;
+        let mitad;
+     
+        while ((encontrado === false) && (inicio <= fin)) {
+            mitad = Math.floor((inicio + fin)/2);
+            if (this.productos[mitad].codigo == codigo) {
+                encontrado = true;
+                resultado = this.productos[mitad];
+            } else if (this.productos[mitad].codigo > codigo) {
+                fin = mitad - 1;
+            } else {
+                inicio = mitad + 1;
             }
         }
-        return null;
+        return resultado;
     }
 
     mostrarBusqueda(resultado){
