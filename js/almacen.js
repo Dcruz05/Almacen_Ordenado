@@ -4,24 +4,22 @@ class Inventario{
     }
 
     agregar(producto){
-        if(this.productos.length==0){}
+        let i = this.productos.length
+        if (i==0){
+            this.productos[i]=producto
+            return true
+        }
         let buscar = this.buscar(producto.codigo)
-        if(buscar==null && this.productos.length>=0){
-            if(producto.codigo!=""){
-                this.productos.push(producto)
-                /*for(let i=0;i<this.productos.length;i++){
-                    if(this.productos[i].codigo<producto.codigo){   
-                        this.productos[i+1]=producto;
-                    }
-                }*/
-                return true
-            }else{
-                return null
+        if(buscar == null && this.productos.length>0){
+            while (producto.codigo < this.productos[i-1].codigo){
+                this.productos[i]= this.productos[i-1];
+                i--;
             }
+            this.productos[i]=producto;
+            return true
         }else if(buscar!=null){
             return false;
         }
-
     }
 
     eliminar(codigo){

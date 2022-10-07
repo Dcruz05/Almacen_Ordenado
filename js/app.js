@@ -8,18 +8,19 @@ btnAgregar.addEventListener("click",(e)=>{
     const nombre = document.getElementById("nombre").value;
     const cantidad = document.getElementById("cantidad").value;
     const precio = document.getElementById("precio").value;
-    
-    const producto = new Producto(codigo, nombre, cantidad, precio);
-    respuesta = almacen.agregar(producto)
-    if(respuesta==true){
-        document.getElementById("listado").innerHTML=`Se agrego el producto`
-
-    }
-    else if(respuesta==false){
-        document.getElementById("listado").innerHTML =`No se puede agregar un producto con codigo repetido`;
-    }else{
+    if (codigo=="") {
         document.getElementById("listado").innerHTML=`No se agrego el producto, falta el codigo`
+    }else{
+        const producto = new Producto(parseInt(codigo), nombre, cantidad, precio);
+        respuesta = almacen.agregar(producto)
+        if(respuesta==true){
+            document.getElementById("listado").innerHTML=`Se agrego el producto`
+        }
+        else if(respuesta==false){
+            document.getElementById("listado").innerHTML =`No se puede agregar un producto con codigo repetido`;
+        }
     }
+
 
     e.preventDefault();
 })
