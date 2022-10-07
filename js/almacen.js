@@ -10,14 +10,14 @@ class Inventario{
             return true
         }
         let buscar = this.buscar(producto.codigo)
-        if(buscar == null && this.productos.length>0){
-            while (producto.codigo < this.productos[i-1].codigo){
+        if(buscar == null ){
+            while (this.productos[i-1]!=null&&producto.codigo < this.productos[i-1].codigo){
                 this.productos[i]= this.productos[i-1];
                 i--;
             }
             this.productos[i]=producto;
             return true
-        }else if(buscar!=null){
+        }else{
             return false;
         }
     }
