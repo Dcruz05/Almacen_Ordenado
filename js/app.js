@@ -10,8 +10,16 @@ btnAgregar.addEventListener("click",(e)=>{
     const precio = document.getElementById("precio").value;
     
     const producto = new Producto(codigo, nombre, cantidad, precio);
-    almacen.agregar(producto);
-    document.getElementById("listado").innerHTML =``;
+    respuesta = almacen.agregar(producto)
+    if(respuesta==true){
+        document.getElementById("listado").innerHTML=`Se agrego el producto`
+
+    }
+    else if(respuesta==false){
+        document.getElementById("listado").innerHTML =`No se puede agregar un producto con codigo repetido`;
+    }else{
+        document.getElementById("listado").innerHTML=`No se agrego el producto, falta el codigo`
+    }
 
     e.preventDefault();
 })
@@ -34,10 +42,8 @@ btnMostrarInvertido.addEventListener("click", (e) => {
 const btnEliminar = document.getElementById("btneliminar")
 btnEliminar.addEventListener("click", (e) => {
     if(almacen.eliminar(document.getElementById("dltCodigo").value)==true){
-        alert("El Producto se elimino con exito")
-    }else alert("El producto que desea eliminar no existe");
-    document.getElementById("listado").innerHTML =``
-
+        document.getElementById("listado").innerHTML =`Producto eliminado`
+    }else document.getElementById("listado").innerHTML =`El producto que desea eliminar no existe`
 });
 
 const btnBuscar = document.getElementById("btnBuscar")
@@ -45,3 +51,4 @@ btnBuscar.addEventListener("click", (e) => {
     const producto = almacen.buscar(document.getElementById("schCodigo").value)
     document.getElementById("listado").innerHTML = `${almacen.mostrarBusqueda(producto)}`
 })
+

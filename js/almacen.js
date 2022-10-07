@@ -1,11 +1,26 @@
 class Inventario{
     constructor(){
-        this.productos=new this.productos();
+        this.productos=new Array();
     }
 
     agregar(producto){
-        if(producto.codigo!="")
-            this.productos[this.productos.length]=producto
+        if(this.productos.length==0){}
+        let buscar = this.buscar(producto.codigo)
+        if(buscar==null && this.productos.length>=0){
+            if(producto.codigo!=""){
+                this.productos.push(producto)
+                /*for(let i=0;i<this.productos.length;i++){
+                    if(this.productos[i].codigo<producto.codigo){   
+                        this.productos[i+1]=producto;
+                    }
+                }*/
+                return true
+            }else{
+                return null
+            }
+        }else if(buscar!=null){
+            return false;
+        }
 
     }
 
