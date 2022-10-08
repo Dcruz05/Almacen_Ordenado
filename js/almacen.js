@@ -64,7 +64,7 @@ class Inventario{
         if(resultado!=null){
             return `${resultado.infoHtml()}`
         }else{
-            return `El producto que desea buscar no existe`;
+            return null;
         }
     }
 
